@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Finden Sie das passende Contentdesk-Hosting mit einem Direkt-Rechner oder einem unabhängigen Schritt-für-Schritt-Assistenten.">
+<title>Welches Contentdesk-Angebot passt zu mir?</title>
+<style>
+  * { box-sizing: border-box; }
+  :root {
+    color-scheme: light;
+    --navy: #12395c;
+    --blue: #0060a9;
+    --teal: #237c68;
+    --amber: #926200;
+    --ink: #16283a;
+    --muted: #52677b;
+    --line: #dce6ef;
+  }
+  body { margin: 0; background: #f3f7fb; color: var(--ink); font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 1180px; margin: auto; padding: 36px 24px 28px; }
+  h1, h2, h3, p { margin: 0; }
+  h1 { max-width: 800px; margin: 8px 0 14px; color: var(--navy); font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.15; }
+  h2 { color: var(--navy); font-size: 1.4rem; }
+  h3 { color: var(--navy); font-size: 1.02rem; }
+  a { color: var(--blue); }
+  .eyebrow { color: var(--blue); font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .intro { max-width: 780px; color: var(--muted); }
+  .mode-links { display: flex; flex-wrap: wrap; gap: 12px; margin: 22px 0 16px; }
+  .mode-links a { padding: 10px 16px; border: 1px solid #b3cce2; border-radius: 9px; background: #fff; text-decoration: none; font-weight: 700; }
+  .mode-links a:first-child { color: #fff; background: var(--blue); border-color: var(--blue); }
+  .small { color: var(--muted); font-size: .82rem; }
+  .calculator { scroll-margin-top: 20px; margin-top: 36px; }
+  .section-head { margin-bottom: 18px; }
+  .section-head p { margin-top: 5px; color: var(--muted); font-size: .9rem; }
+  .layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 20px; align-items: start; }
+  .card { padding: 24px; border: 1px solid var(--line); border-radius: 14px; background: #fff; box-shadow: 0 3px 12px rgba(18,57,92,.04); }
+  fieldset { min-width: 0; margin: 0 0 22px; padding: 0; border: 0; }
+  legend { padding: 0; margin-bottom: 14px; color: var(--navy); font-weight: 750; }
+  .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .field { min-width: 0; }
+  label { display: block; margin-bottom: 5px; font-size: .83rem; font-weight: 700; }
+  input { width: 100%; padding: 10px 12px; border: 1px solid #b4c5d4; border-radius: 8px; color: var(--ink); background: #fff; font: inherit; font-variant-numeric: tabular-nums; }
+  input[aria-invalid="true"] { border-color: #b32237; }
+  input:focus-visible, button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid #0060a9; outline-offset: 3px; }
+  .hint { display: block; margin-top: 5px; color: var(--muted); font-size: .73rem; }
+  details { margin: 12px 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 9px; background: #f8fafc; }
+  summary { color: var(--blue); cursor: pointer; font-size: .85rem; font-weight: 700; }
+  details[open] summary { margin-bottom: 12px; }
+  .details-intro { margin-bottom: 14px; color: var(--muted); font-size: .8rem; }
+  .common-count { margin: 14px 0; color: var(--muted); font-size: .81rem; }
+  .errors { margin-bottom: 18px; padding: 14px 16px; border: 1px solid #e5b3bb; border-radius: 9px; background: #fff0f2; color: #8e1a2c; font-size: .86rem; }
+  .errors ul { margin: 6px 0 0; padding-left: 20px; }
+  button { padding: 10px 16px; border: 1px solid #b3cce2; border-radius: 8px; color: var(--blue); background: #fff; cursor: pointer; font: inherit; font-size: .85rem; font-weight: 700; }
+  button.primary { border-color: var(--blue); color: #fff; background: var(--blue); }
+  button:disabled { opacity: .5; cursor: default; }
+  .form-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 24px; padding: 0; list-style: none; }
+  .steps li { padding: 9px 6px; border-radius: 8px; background: #edf2f7; color: var(--muted); text-align: center; font-size: .77rem; font-weight: 650; }
+  .steps li[aria-current="step"] { color: #fff; background: var(--blue); }
+  .progress-text { margin-bottom: 10px; color: var(--muted); font-size: .78rem; }
+  .pending { padding: 38px 24px; border: 1px dashed #b4c5d4; border-radius: 14px; color: var(--muted); background: #fff; }
+  .pending h3 { margin-bottom: 8px; }
+  .result-banner { margin-bottom: 16px; padding: 18px; border: 1px solid #a6d2c6; border-radius: 10px; background: #e6f4ef; }
+  .result-banner[data-tier="business"] { border-color: #ddc88d; background: #fff7e5; }
+  .result-banner[data-tier="flex"] { border-color: #aecbea; background: #e8f1fa; }
+  .result-title { margin: 4px 0 6px; font-size: 1.35rem; line-height: 1.25; }
+  .result-price { margin-bottom: 8px; color: var(--navy); font-size: 1.2rem; font-weight: 750; }
+  .result-description { font-size: .88rem; }
+  .reason { margin-bottom: 16px; color: #33495d; font-size: .86rem; }
+  .path { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; margin-bottom: 18px; }
+  .offer { padding: 12px 8px; border: 1px solid var(--line); border-radius: 9px; text-align: center; }
+  .offer strong { display: block; color: var(--navy); font-size: .85rem; }
+  .offer span { display: block; margin-top: 3px; color: var(--muted); font-size: .73rem; }
+  .offer .selection { min-height: 18px; color: var(--blue); font-size: .67rem; font-weight: 750; }
+  .offer[data-selected="true"] { border: 2px solid var(--blue); background: #e8f1fa; }
+  .metric + .metric { margin-top: 18px; }
+  .metric-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; justify-content: space-between; font-size: .84rem; }
+  .metric-head strong { color: var(--navy); }
+  .metric-value { font-variant-numeric: tabular-nums; font-weight: 700; }
+  .gauge-wrap { position: relative; margin: 12px 0 7px; }
+  .gauge { display: flex; height: 12px; overflow: hidden; border-radius: 6px; }
+  .gauge span:first-child { width: 50%; background: #62b99f; }
+  .gauge span:nth-child(2) { width: 30%; background: #e6bc61; }
+  .gauge span:last-child { width: 20%; background: #6a9bc6; }
+  .search-gauge span:first-child { width: 60%; }
+  .search-gauge span:nth-child(2) { width: 30%; }
+  .search-gauge span:last-child { width: 10%; }
+  .marker { position: absolute; top: -5px; width: 4px; height: 22px; transform: translateX(-50%); border: 1px solid #fff; border-radius: 3px; background: var(--navy); }
+  .gauge-labels { display: flex; justify-content: space-between; gap: 6px; color: var(--muted); font-size: .64rem; }
+  .gauge-note { margin-top: 8px; color: var(--muted); font-size: .74rem; }
+  .search-note { margin-top: 14px; padding: 12px 14px; border-left: 3px solid var(--teal); border-radius: 6px; background: #e6f4ef; font-size: .82rem; }
+  .search-note[data-status="plan"], .search-note[data-status="upgrade"] { border-left-color: var(--amber); background: #fff7e5; }
+  .mapping-note { margin-top: 10px; color: #815700; font-size: .8rem; }
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 20px; }
+  .fact { padding: 10px; border-radius: 8px; background: #f3f7fb; font-size: .69rem; color: var(--muted); }
+  .fact strong { display: block; color: var(--navy); font-size: .92rem; }
+  .formula { overflow-wrap: anywhere; color: var(--muted); font-size: .76rem; }
+  .formula p + p { margin-top: 8px; }
+  .architecture { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+  .node { flex: 1; padding: 10px 8px; border: 1px solid #aecbea; border-radius: 9px; background: #e8f1fa; text-align: center; font-size: .75rem; }
+  .node strong { display: block; color: var(--navy); }
+  .node span { display: block; margin-top: 3px; color: var(--muted); }
+  .node.search { border-color: #ace0d4; background: #e6f4ef; }
+  .connector { color: var(--blue); }
+  .footer { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: .79rem; }
+  .footer p + p { margin-top: 9px; }
+  [hidden] { display: none !important; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) {
+    .wrap { padding: 24px 14px; }
+    .card { padding: 18px; }
+    .fields { gap: 12px; }
+    .facts { grid-template-columns: 1fr; }
+    .fact strong { display: inline; margin-right: 7px; }
+    .offer { padding: 10px 4px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .wrap { padding: 0; }
+    .mode-links, .form-actions, .steps, .pending { display: none; }
+    .layout { grid-template-columns: 1fr; }
+    .card { box-shadow: none; }
+    .result-banner, .offer, .metric { break-inside: avoid; }
+  }
+</style>
+<script src="recommendation-model.js"></script>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <div class="eyebrow">Contentdesk · Angebots-Empfehlung</div>
+    <h1>Ihr Datenprofil. Das passende Hosting.</h1>
+    <p class="intro">Geben Sie die Grösse Ihres Datenbestands und die Nutzung an. Sie erhalten eine nachvollziehbare Empfehlung für Start, Business oder Managed Flex – mit einer separaten Einschätzung für die Suche.</p>
+    <nav class="mode-links" aria-label="Rechner auswählen">
+      <a href="#direct">Direkt-Rechner</a>
+      <a href="#wizard">Schritt-für-Schritt-Assistent</a>
+    </nav>
+    <p class="small">Zwei unabhängige Wege auf einer Seite. Beide starten mit Ihrem Beispiel: 5000 Objekte, 3 Benutzer, 4 Sprachen, 4 Kanäle und 500 gemeinsame Attribute.</p>
+  </header>
+
+  <noscript><p class="errors">Für die Angebotsberechnung muss JavaScript aktiviert sein. Die bestehenden <a href="offers.html">Angebote im Überblick</a> können Sie ohne JavaScript ansehen.</p></noscript>
+
+  <section class="calculator" id="direct" data-mode="direct" aria-labelledby="direct-title">
+    <div class="section-head">
+      <div class="eyebrow">Variante 1</div>
+      <h2 id="direct-title">Direkt-Rechner</h2>
+      <p>Alle einfachen Angaben auf einen Blick. Die Empfehlung passt sich sofort an.</p>
+    </div>
+    <div class="layout"><div data-input-host></div><div data-output-host></div></div>
+  </section>
+
+  <section class="calculator" id="wizard" data-mode="wizard" aria-labelledby="wizard-title">
+    <div class="section-head">
+      <div class="eyebrow">Variante 2</div>
+      <h2 id="wizard-title">Schritt für Schritt zum Angebot</h2>
+      <p>Ein eigener Assistent mit eigenen Angaben. Die Empfehlung erscheint nach dem letzten Schritt.</p>
+    </div>
+    <div class="layout">
+      <div data-input-host></div>
+      <div>
+        <div class="pending" data-pending>
+          <h3>Hier erscheint Ihre Empfehlung</h3>
+          <p>Prüfen Sie den Datenbestand, die Nutzung und die optionalen Details. Klicken Sie danach auf «Angebot empfehlen».</p>
+          <p class="small">Eingaben im Direkt-Rechner verändern diesen Assistenten nicht.</p>
+        </div>
+        <div data-output-host hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p><strong>Eine Orientierung, keine Leistungszusage:</strong> Die Berechnung übernimmt die Heuristik des bestehenden Skalierungsrechners. Lastindizes sind keine gemessene Auslastung und keine offiziellen Anbietergrenzen. Vor einem Wechsel Ladezeiten, Importe und tatsächliche Engpässe prüfen.</p>
+    <p>Preise und Tarifdetails sind Planungswerte, Stand November 2026, keine verbindlichen Angebote. Die geschätzten laufenden Kosten enthalten das beschriebene Hosting und die Suche, nicht zusätzliche Projekt-, Migrations- oder Supportleistungen.</p>
+    <p>Quellen: <a href="index.html">ursprünglicher Skalierungsrechner</a> · <a href="hosting.html">Hosting-Architektur und Wechselkriterien</a> · <a href="offers.html">Angebote im Überblick</a></p>
+  </footer>
+</main>
+
+<template id="input-template">
+  <form class="card" novalidate>
+    <div class="errors" data-errors role="alert" hidden>
+      <strong>Bitte die Eingaben korrigieren.</strong>
+      <ul></ul>
+    </div>
+    <p class="progress-text" data-progress hidden></p>
+    <ol class="steps" data-steps hidden aria-label="Fortschritt">
+      <li>Datenbestand</li><li>Nutzung</li><li>Details</li>
+    </ol>
+    <fieldset data-step="0">
+      <legend>1 · Ihr Datenbestand</legend>
+      <div class="fields">
+        <div class="field">
+          <label data-label="objects">Objekte / Produkte</label>
+          <input data-field="objects" type="number" min="1" step="1" value="5000" required>
+          <span class="hint" data-hint="objects">Gesamte Anzahl der Objekte (SKUs).</span>
+        </div>
+        <div class="field">
+          <label data-label="attributes">Attribute / Properties</label>
+          <input data-field="attributes" type="number" min="0" step="1" value="500" required>
+          <span class="hint" data-hint="attributes">Anzahl der definierten Attribute, nicht der ausgefüllten Werte.</span>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset data-step="1">
+      <legend>2 · Ihr Team und die Ausgabe</legend>
+      <div class="fields">
+        <div class="field">
+          <label data-label="users">Gleichzeitig aktive Benutzer</label>
+          <input data-field="users" type="number" min="1" step="1" value="3" required>
+          <span class="hint" data-hint="users">Gleichzeitige Bearbeitung, nicht alle Benutzerkonten.</span>
+        </div>
+        <div class="field">
+          <label data-label="locales">Sprachen (Locales)</label>
+          <input data-field="locales" type="number" min="1" step="1" value="4" required>
+          <span class="hint" data-hint="locales">Zum Beispiel Deutsch, Französisch, Italienisch und Englisch.</span>
+        </div>
+        <div class="field">
+          <label data-label="channels">Ausgabekanäle (Channels)</label>
+          <input data-field="channels" type="number" min="1" step="1" value="4" required>
+          <span class="hint" data-hint="channels">Zum Beispiel Webshop, Print, Marktplatz und Händlerportal.</span>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset data-step="2">
+      <legend>3 · Optionale Details</legend>
+      <p class="details-intro">Ohne weitere Angaben gelten alle Attribute als gemeinsam für alle Sprachen und Kanäle. Wenn Werte je Sprache oder Kanal unterschiedlich sind, tragen Sie die Aufteilung hier ein. Das kann die Empfehlung deutlich verändern.</p>
+      <details>
+        <summary>Erweiterte Angaben öffnen</summary>
+        <p class="details-intro">Jedes Attribut gehört nur in eine Kategorie. Die übrigen Attribute bleiben gemeinsam. Ein sprach- und kanalabhängiges Attribut wird beispielsweise bei 4 Sprachen und 4 Kanälen mit 16 Feldern bewertet.</p>
+        <div class="fields">
+          <div class="field">
+            <label data-label="localized">Davon nur sprachabhängig</label>
+            <input data-field="localized" type="number" min="0" step="1" value="0" required>
+            <span class="hint" data-hint="localized">Zum Beispiel ein übersetzter Produktname.</span>
+          </div>
+          <div class="field">
+            <label data-label="scoped">Davon nur kanalabhängig</label>
+            <input data-field="scoped" type="number" min="0" step="1" value="0" required>
+            <span class="hint" data-hint="scoped">Zum Beispiel unterschiedliche Werte für Print und Web.</span>
+          </div>
+          <div class="field">
+            <label data-label="both">Davon sprach- und kanalabhängig</label>
+            <input data-field="both" type="number" min="0" step="1" value="0" required>
+            <span class="hint" data-hint="both">Werte unterscheiden sich sowohl nach Sprache als auch Kanal.</span>
+          </div>
+          <div class="field">
+            <label data-label="docKb">Dokumentgrösse pro Objekt (KB)</label>
+            <input data-field="docKb" type="number" min="0.01" step="any" value="100" required>
+            <span class="hint" data-hint="docKb">Schätzung für das Suchdokument, keine Bild- oder Dateigrösse.</span>
+          </div>
+        </div>
+      </details>
+      <p class="common-count" data-common></p>
+    </fieldset>
+    <div class="form-actions">
+      <button type="button" data-reset>Beispiel wiederherstellen</button>
+      <div>
+        <button type="button" data-back hidden>Zurück</button>
+        <button type="submit" class="primary" data-next hidden>Weiter</button>
+      </div>
+    </div>
+  </form>
+</template>
+
+<template id="output-template">
+  <div class="card" data-result>
+    <div class="result-banner" data-banner>
+      <div class="eyebrow">Ihre Hosting-Empfehlung</div>
+      <div data-summary aria-live="polite" aria-atomic="true">
+        <h3 class="result-title" data-title></h3>
+        <p class="result-price" data-price></p>
+        <p class="result-description" data-description></p>
+      </div>
+    </div>
+    <p class="reason" data-reason></p>
+    <div class="path" aria-label="Hosting-Angebote im Vergleich">
+      <div class="offer" data-offer="start"><strong>Start</strong><span>ca. CHF 73 / Mt.</span><span>Standard + Exoscale</span><span class="selection"></span></div>
+      <div class="offer" data-offer="business"><strong>Business</strong><span>ca. CHF 87 / Mt.</span><span>Business + Exoscale</span><span class="selection"></span></div>
+      <div class="offer" data-offer="flex"><strong>Managed Flex</strong><span>ab CHF 170 / Mt.</span><span>Flex M + Suche</span><span class="selection"></span></div>
+    </div>
+
+    <div class="metric">
+      <div class="metric-head"><strong>Hosting · Lastindex L</strong><span class="metric-value" data-hosting-value></span></div>
+      <div class="gauge-wrap" role="img" data-hosting-diagram>
+        <div class="gauge"><span></span><span></span><span></span></div>
+        <span class="marker" data-hosting-marker></span>
+      </div>
+      <div class="gauge-labels"><span>Start: unter 0,50</span><span>Business: ab 0,50</span><span>Flex: ab 0,80</span></div>
+    </div>
+    <div class="metric">
+      <div class="metric-head"><strong>Suche · Lastindex O</strong><span class="metric-value" data-search-value></span></div>
+      <div class="gauge-wrap" role="img" data-search-diagram>
+        <div class="gauge search-gauge"><span></span><span></span><span></span></div>
+        <span class="marker" data-search-marker></span>
+      </div>
+      <div class="gauge-labels"><span>Passend: unter 0,60</span><span>Planen: ab 0,60</span><span>Prüfen: ab 0,90</span></div>
+    </div>
+    <p class="gauge-note">Modellskala 0–1, keine Auslastung in Prozent. Höhere Werte stehen rechts am Skalenende; der tatsächliche Index wird darüber angezeigt.</p>
+    <div class="search-note" data-search-note></div>
+    <p class="mapping-note" data-mapping hidden>Mehr als 1000 berechnete Index-Felder: Mapping und tatsächlich indexierte Attribute prüfen. Ein grösserer Suchserver allein erhöht nicht automatisch das konfigurierte Feldlimit.</p>
+
+    <div class="facts">
+      <div class="fact"><strong data-fields></strong>Index-Felder (berechnet)</div>
+      <div class="fact"><strong data-cells></strong>Attributzellen (Objekte × Felder)</div>
+      <div class="fact"><strong data-index></strong>Geschätzter Suchindex</div>
+    </div>
+    <details>
+      <summary>Warum dieses Angebot? Berechnung und Aufbau</summary>
+      <div class="formula">
+        <p data-breakdown></p>
+        <p>F = gemeinsame Attribute + sprachabhängige × Sprachen + kanalabhängige × Kanäle + kombinierte × Sprachen × Kanäle. C = Objekte × F.</p>
+        <p>L = 0,40 × C / 10 Mio + 0,25 × Objekte / 30 000 + 0,20 × Benutzer / 3 + 0,15 × F / 1000.</p>
+        <p>O = max(1,2 × F / 1000; Indexgrösse / 10 GB). Alle Schwellen sind Heuristikwerte aus dem ursprünglichen Rechner.</p>
+      </div>
+      <div class="architecture" role="img" data-architecture>
+        <div class="node"><strong data-web-node></strong><span>Contentdesk · MariaDB</span></div>
+        <span class="connector" aria-hidden="true">↔</span>
+        <div class="node search"><strong data-search-node></strong><span data-search-detail></span></div>
+      </div>
+      <p class="small" data-flex-note hidden>Flex M mit integrierter Suche: ab CHF 170/Monat laut Planung. Alternative: Flex S mit separatem Exoscale Hobbyist-2, ca. CHF 197/Monat. Ressourcen und Suchkapazität vor einer Entscheidung prüfen.</p>
+    </details>
+  </div>
+</template>
+
+<script>
+const offers = {
+  start: {
+    title: 'Start-Angebot empfohlen',
+    price: 'ca. CHF 73 / Monat',
+    description: 'Hostpoint Webhosting Standard + Exoscale OpenSearch Hobbyist-2.',
+    reason: 'Die geschätzte Hosting-Last liegt unter 0,50. Das Start-Angebot ist nach diesem Modell der passende Einstieg. Beobachten Sie Ladezeiten und Import-Stabilität.',
+    web: 'Hostpoint Standard'
+  },
+  business: {
+    title: 'Business-Angebot testen',
+    price: 'ca. CHF 87 / Monat',
+    description: 'Hostpoint Webhosting Business + Exoscale OpenSearch Hobbyist-2.',
+    reason: 'Die geschätzte Hosting-Last liegt ab 0,50 und unter 0,80. Business ist ein Zwischenschritt mit mehr Reserven, aber weiterhin geteilter Serverleistung.',
+    web: 'Hostpoint Business'
+  },
+  flex: {
+    title: 'Managed Flex prüfen',
+    price: 'ab CHF 170 / Monat',
+    description: 'Managed Flex M mit integrierter Suche als Planungsvariante.',
+    reason: 'Die geschätzte Hosting-Last liegt bei mindestens 0,80. Prüfen Sie einen Flex-Server mit fest zugeteilten Ressourcen. Die passende Grösse muss anhand realer Last bestätigt werden.',
+    web: 'Hostpoint Flex M'
+  }
+};
+const countFormat = new Intl.NumberFormat('de-CH');
+const indexFormat = new Intl.NumberFormat('de-CH', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+const sizeFormat = new Intl.NumberFormat('de-CH', { maximumFractionDigits: 2 });
+const priceFormat = new Intl.NumberFormat('de-CH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+function initCalculator(root) {
+  const wizard = root.dataset.mode === 'wizard';
+  const inputHost = root.querySelector('[data-input-host]');
+  const outputHost = root.querySelector('[data-output-host]');
+  inputHost.append(document.getElementById('input-template').content.cloneNode(true));
+  outputHost.append(document.getElementById('output-template').content.cloneNode(true));
+  const form = inputHost.querySelector('form');
+  const result = outputHost.querySelector('[data-result]');
+  const errorsElement = form.querySelector('[data-errors]');
+  const inputs = [...form.querySelectorAll('[data-field]')];
+  const fieldsets = [...form.querySelectorAll('[data-step]')];
+  const steps = form.querySelector('[data-steps]');
+  const progress = form.querySelector('[data-progress]');
+  const next = form.querySelector('[data-next]');
+  const back = form.querySelector('[data-back]');
+  let step = 0;
+  let completed = false;
+
+  for (const input of inputs) {
+    const field = input.dataset.field;
+    input.id = `${root.id}-${field}`;
+    input.setAttribute('aria-describedby', `${input.id}-hint`);
+    form.querySelector(`[data-label="${field}"]`).htmlFor = input.id;
+    form.querySelector(`[data-hint="${field}"]`).id = `${input.id}-hint`;
+  }
+
+  function readProfile() {
+    return Object.fromEntries(inputs.map(input => [input.dataset.field, input.valueAsNumber]));
+  }
+
+  function setText(selector, text) {
+    result.querySelector(selector).textContent = text;
+  }
+
+  function showErrors(errors, focus = false) {
+    errorsElement.hidden = errors.length === 0;
+    errorsElement.querySelector('ul').replaceChildren(...errors.map(error => {
+      const item = document.createElement('li');
+      item.textContent = error.message;
+      return item;
+    }));
+    for (const input of inputs) {
+      input.setAttribute('aria-invalid', String(errors.some(error => error.field === input.dataset.field)));
+    }
+    if (focus && errors.length) {
+      const input = inputs.find(input => input.dataset.field === errors[0].field);
+      const fieldset = input.closest('[data-step]');
+      if (wizard) {
+        step = Number(fieldset.dataset.step);
+        displayStep();
+      }
+      const details = input.closest('details');
+      if (details) details.open = true;
+      input.focus();
+    }
+  }
+
+  function displayStep() {
+    if (!wizard) return;
+    fieldsets.forEach((fieldset, index) => { fieldset.hidden = index !== step; });
+    [...steps.children].forEach((item, index) => {
+      if (index === step) item.setAttribute('aria-current', 'step');
+      else item.removeAttribute('aria-current');
+    });
+    progress.textContent = `Schritt ${step + 1} von 3`;
+    back.hidden = false;
+    back.disabled = step === 0;
+    next.textContent = step === 2 ? 'Angebot empfehlen' : 'Weiter';
+  }
+
+  function renderRecommendation(profile) {
+    const model = calculateRecommendation(profile);
+    const offer = offers[model.hosting];
+    result.querySelector('[data-banner]').dataset.tier = model.hosting;
+    setText('[data-title]', offer.title);
+    setText('[data-price]', offer.price);
+    setText('[data-description]', offer.description);
+    setText('[data-reason]', offer.reason);
+    result.querySelectorAll('[data-offer]').forEach(card => {
+      const selected = card.dataset.offer === model.hosting;
+      card.dataset.selected = String(selected);
+      card.querySelector('.selection').textContent = selected ? 'Für Ihr Hosting gewählt' : '';
+    });
+    setText('[data-hosting-value]', indexFormat.format(model.hostingLoad));
+    setText('[data-search-value]', indexFormat.format(model.searchLoad));
+    result.querySelector('[data-hosting-marker]').style.left = `${Math.min(model.hostingLoad, 1) * 100}%`;
+    result.querySelector('[data-search-marker]').style.left = `${Math.min(model.searchLoad, 1) * 100}%`;
+    result.querySelector('[data-hosting-diagram]').setAttribute('aria-label', `Hosting-Lastindex ${indexFormat.format(model.hostingLoad)}. ${offer.title}.`);
+    const searchLabels = { suitable: 'Suchprofil passend', plan: 'Such-Upgrade einplanen', upgrade: 'Such-Upgrade prüfen' };
+    result.querySelector('[data-search-diagram]').setAttribute('aria-label', `Such-Lastindex ${indexFormat.format(model.searchLoad)}. ${searchLabels[model.search]}.`);
+    const searchNote = result.querySelector('[data-search-note]');
+    searchNote.dataset.status = model.search;
+    if (model.hosting === 'flex') {
+      searchNote.textContent = model.search === 'suitable'
+        ? 'Suche separat bewertet: Das Modell zeigt ein kleines Suchprofil. Für integriertes OpenSearch auf Flex M trotzdem die verfügbare Suchkapazität bestätigen.'
+        : 'Suche separat dimensionieren: Das Profil liegt oberhalb der Komfortzone für Exoscale Hobbyist-2. Auch bei Flex müssen Suchkapazität und Mapping geprüft werden; die Grafik ist keine Flex-Leistungsgrenze.';
+    } else if (model.search === 'suitable') {
+      searchNote.textContent = 'Suche passend: Exoscale Hobbyist-2 liegt nach dem Modell im passenden Bereich. Der angezeigte Hosting-Preis enthält diesen Suchdienst.';
+    } else {
+      const upgradedPrice = model.hosting === 'start' ? 151.90 : 165.90;
+      const lead = model.search === 'plan' ? 'Such-Upgrade einplanen' : 'Such-Upgrade prüfen';
+      searchNote.textContent = `${lead}: Das Hosting-Angebot bleibt separat bewertet. Für OpenSearch Startup-4 statt Hobbyist-2 ergeben sich laut Planung insgesamt ca. CHF ${priceFormat.format(upgradedPrice)}/Monat. Der Preis oben enthält noch Hobbyist-2. Bei hoher Suchlast ist auch Startup-4 nicht ohne Lastprüfung garantiert ausreichend.`;
+    }
+    result.querySelector('[data-mapping]').hidden = !model.mappingReview;
+    setText('[data-fields]', countFormat.format(model.fields));
+    setText('[data-cells]', countFormat.format(model.cells));
+    setText('[data-index]', `${sizeFormat.format(model.indexGb)} GB`);
+    const c = model.contributions;
+    setText('[data-breakdown]', `Hosting-Beiträge: Attributzellen ${indexFormat.format(c.cells)}, Objekte ${indexFormat.format(c.objects)}, Benutzer ${indexFormat.format(c.users)}, Feldkomplexität ${indexFormat.format(c.fields)}. Gemeinsam verbleiben ${countFormat.format(model.common)} Attribute.`);
+    setText('[data-web-node]', offer.web);
+    setText('[data-search-node]', model.hosting === 'flex' ? 'Hostpoint OpenSearch' : 'Exoscale OpenSearch');
+    setText('[data-search-detail]', model.hosting === 'flex' ? 'integriert · Ressourcen prüfen' : 'Hobbyist-2 · Upgrade separat');
+    result.querySelector('[data-architecture]').setAttribute('aria-label', `${offer.web} mit Contentdesk und MariaDB, verbunden mit ${model.hosting === 'flex' ? 'integriertem Hostpoint OpenSearch' : 'externem Exoscale OpenSearch'}.`);
+    result.querySelector('[data-flex-note]').hidden = model.hosting !== 'flex';
+  }
+
+  function update() {
+    const profile = readProfile();
+    const errors = validateProfile(profile);
+    showErrors(errors);
+    const common = profile.attributes - profile.localized - profile.scoped - profile.both;
+    form.querySelector('[data-common]').textContent = errors.length
+      ? 'Bitte die Angaben prüfen. Ohne gültige Eingaben wird kein Angebot empfohlen.'
+      : `${countFormat.format(common)} gemeinsame Attribute · ${countFormat.format(profile.localized)} nur sprachabhängig · ${countFormat.format(profile.scoped)} nur kanalabhängig · ${countFormat.format(profile.both)} kombiniert.`;
+    const visible = errors.length === 0 && (!wizard || completed);
+    outputHost.hidden = !visible;
+    const pending = root.querySelector('[data-pending]');
+    if (pending) pending.hidden = visible;
+    if (visible) renderRecommendation(profile);
+    return errors;
+  }
+
+  form.addEventListener('input', () => {
+    if (wizard) completed = false;
+    update();
+  });
+  form.querySelector('[data-reset]').addEventListener('click', () => {
+    form.reset();
+    completed = false;
+    step = 0;
+    displayStep();
+    update();
+  });
+  back.addEventListener('click', () => {
+    if (step > 0) step -= 1;
+    displayStep();
+  });
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (!wizard) {
+      const errors = update();
+      showErrors(errors, true);
+      return;
+    }
+    const profile = readProfile();
+    const errors = validateProfile(profile);
+    const currentFields = [...fieldsets[step].querySelectorAll('[data-field]')].map(input => input.dataset.field);
+    const currentErrors = step === 2 ? errors : errors.filter(error => currentFields.includes(error.field));
+    if (currentErrors.length) {
+      showErrors(currentErrors, true);
+      return;
+    }
+    if (step < 2) {
+      step += 1;
+      displayStep();
+    } else {
+      completed = true;
+      update();
+      const title = result.querySelector('[data-title]');
+      title.tabIndex = -1;
+      title.focus();
+    }
+  });
+  if (wizard) {
+    steps.hidden = false;
+    progress.hidden = false;
+    next.hidden = false;
+    displayStep();
+  }
+  update();
+}
+
+document.querySelectorAll('.calculator').forEach(initCalculator);
+</script>
+</body>
+</html>

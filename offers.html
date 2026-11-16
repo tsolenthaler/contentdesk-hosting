@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Drei Hosting-Angebote für Contentdesk im Vergleich: Standard, Business und Managed Flex.">
+<title>Hosting-Angebote für Contentdesk</title>
+<style>
+  * { box-sizing: border-box; }
+  :root {
+    color-scheme: light;
+    --navy: #12395c;
+    --blue: #0060a9;
+    --blue-light: #e8f1fa;
+    --teal: #3aa08b;
+    --teal-light: #e6f4ef;
+    --amber: #e0a63c;
+    --ink: #16283a;
+    --muted: #52677b;
+    --border: #dce6ef;
+  }
+  body {
+    margin: 0;
+    padding: 32px 20px;
+    background: linear-gradient(180deg, #eaf1f8 0%, #f6f9fc 360px);
+    color: var(--ink);
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; }
+  .eyebrow { color: var(--blue); font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  h1 { margin: 5px 0 8px; color: var(--navy); font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.15; }
+  h2 { color: var(--navy); font-size: 1.25rem; }
+  h3 { margin: 0; color: var(--navy); font-size: 1.15rem; }
+  p { margin: 0; }
+  .intro { max-width: 760px; color: var(--muted); }
+  .top-links { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 16px; font-size: .88rem; }
+  a { color: var(--blue); font-weight: 650; }
+  .recommendation {
+    margin: 24px 0;
+    padding: 16px 18px;
+    border-left: 4px solid var(--teal);
+    border-radius: 10px;
+    background: var(--teal-light);
+  }
+  .recommendation strong { color: var(--navy); }
+  .offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+  .offer {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-top: 5px solid var(--teal);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 3px 14px rgba(18, 57, 92, .07);
+  }
+  .offer.business { border-top-color: var(--amber); }
+  .offer.flex { border-top-color: var(--blue); }
+  .offer-label { margin-bottom: 5px; color: var(--muted); font-size: .75rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+  .price { margin: 14px 0 2px; color: var(--navy); font-size: 1.9rem; font-weight: 800; letter-spacing: -.03em; }
+  .price small { font-size: .85rem; font-weight: 550; letter-spacing: 0; }
+  .price-note { min-height: 42px; color: var(--muted); font-size: .82rem; }
+  .diagram { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 18px 0; }
+  .node {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 6px;
+    border: 1px solid #aecbea;
+    border-radius: 9px;
+    background: var(--blue-light);
+    text-align: center;
+  }
+  .node.search { border-color: #ace0d4; background: var(--teal-light); }
+  .node strong { display: block; color: var(--navy); font-size: .77rem; }
+  .node span { display: block; margin-top: 3px; color: var(--muted); font-size: .68rem; line-height: 1.35; }
+  .connector { color: #7691a8; font-size: 1rem; font-weight: 800; }
+  .offer ul { display: grid; gap: 8px; margin: 0 0 18px; padding-left: 18px; color: #33495d; font-size: .86rem; }
+  .suitable { margin-top: auto; padding: 11px 12px; border-radius: 8px; background: #f3f7fb; color: #33495d; font-size: .83rem; }
+  .suitable strong { color: var(--navy); }
+  .flex-options { display: grid; gap: 8px; margin: 0 0 18px; }
+  .option { padding: 10px 11px; border-radius: 8px; background: #f3f7fb; font-size: .81rem; }
+  .option strong { display: block; color: var(--navy); }
+  .chart-section, .notes {
+    margin-top: 22px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 3px 14px rgba(18, 57, 92, .05);
+  }
+  .chart-section > p { margin-top: 4px; color: var(--muted); font-size: .88rem; }
+  .chart { display: block; width: 100%; height: auto; margin-top: 12px; }
+  .chart text { fill: #52677b; font-family: inherit; font-size: 13px; }
+  .chart .value { fill: var(--navy); font-size: 14px; font-weight: 750; }
+  .chart .gridline { stroke: #e6edf3; stroke-width: 1; }
+  .chart .axis { stroke: #9eb0c0; stroke-width: 1; }
+  .notes { color: var(--muted); font-size: .82rem; }
+  .notes p + p { margin-top: 8px; }
+  .foot { margin: 18px 0 0; color: #6b7f91; font-size: .75rem; text-align: center; }
+  @media (max-width: 850px) { .offers { grid-template-columns: 1fr; } .offer { padding: 20px; } .price-note { min-height: 0; } }
+  @media (max-width: 520px) {
+    body { padding: 22px 14px; }
+    .chart-section, .notes { padding: 15px; }
+    .chart text { font-size: 11px; }
+    .chart .value { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <div class="eyebrow">Contentdesk · Hosting</div>
+    <h1>Drei Angebote für Ihren Betrieb</h1>
+    <p class="intro">Vom günstigen Einstieg bis zur planbaren Serverleistung: Die Angebote unterscheiden sich darin, wie viel Hosting-Reserve Sie erhalten und wo die Produktsuche betrieben wird.</p>
+    <nav class="top-links" aria-label="Weiterführende Seiten">
+      <a href="index.html">Zum Skalierungsrechner</a>
+      <a href="hosting.html">Zum ausführlichen Skalierungspfad</a>
+    </nav>
+  </header>
+
+  <aside class="recommendation">
+    <strong>Einordnung für das aktuelle Modell:</strong>
+    Der bestehende Skalierungspfad empfiehlt vorerst Angebot 1. Ein Wechsel sollte sich an realen Ladezeiten, Importen und Bearbeitungsabbrüchen orientieren – nicht allein am geschätzten Lastindex.
+  </aside>
+
+  <section class="offers" aria-label="Die drei Hosting-Angebote">
+    <article class="offer">
+      <div class="offer-label">Angebot 1 · Einstieg</div>
+      <h2>Webhosting Standard</h2>
+      <div class="price">ca. CHF 73 <small>/ Monat</small></div>
+      <p class="price-note">Hostpoint Standard plus Exoscale OpenSearch Hobbyist-2</p>
+      <div class="diagram" role="img" aria-label="Contentdesk und MariaDB bei Hostpoint, OpenSearch separat bei Exoscale">
+        <div class="node"><strong>Hostpoint</strong><span>Contentdesk<br>MariaDB</span></div>
+        <span class="connector" aria-hidden="true">↔</span>
+        <div class="node search"><strong>Exoscale</strong><span>OpenSearch<br>2 GB · 16 GB</span></div>
+      </div>
+      <ul>
+        <li>Shared Hosting; die Leistung wird mit anderen Kunden geteilt.</li>
+        <li>100 GB NVMe und bis zu 10 MariaDB-Datenbanken laut Planungsseite.</li>
+        <li>Günstigste Option für kleine Teams und das aktuelle Modellprofil.</li>
+      </ul>
+      <div class="suitable"><strong>Passt, wenn:</strong> Seiten, Bearbeitung und Importe im Alltag flüssig und zuverlässig laufen.</div>
+    </article>
+
+    <article class="offer business">
+      <div class="offer-label">Angebot 2 · Mehr Reserven</div>
+      <h2>Webhosting Business</h2>
+      <div class="price">ca. CHF 87 <small>/ Monat</small></div>
+      <p class="price-note">Hostpoint Business plus unverändertes Exoscale OpenSearch</p>
+      <div class="diagram" role="img" aria-label="Contentdesk und MariaDB bei Hostpoint Business, OpenSearch separat bei Exoscale">
+        <div class="node"><strong>Hostpoint</strong><span>Business<br>Contentdesk + MariaDB</span></div>
+        <span class="connector" aria-hidden="true">↔</span>
+        <div class="node search"><strong>Exoscale</strong><span>OpenSearch<br>Hobbyist-2</span></div>
+      </div>
+      <ul>
+        <li>Laut Planungsseite mehr Leistungsreserven als Standard (2 × Power).</li>
+        <li>1000 GB NVMe und bis zu 100 MariaDB-Datenbanken laut Planungsseite.</li>
+        <li>OpenSearch bleibt extern; die Hosting-Leistung ist weiterhin geteilt.</li>
+      </ul>
+      <div class="suitable"><strong>Passt, wenn:</strong> Standard erste Engpässe zeigt und Sie zunächst einen günstigeren Zwischenschritt testen möchten.</div>
+    </article>
+
+    <article class="offer flex">
+      <div class="offer-label">Angebot 3 · Planbare Leistung</div>
+      <h2>Managed Flex Server</h2>
+      <div class="price">ab CHF 170 <small>/ Monat</small></div>
+      <p class="price-note">Zwei mögliche Aufteilungen für Anwendung und Suche</p>
+      <div class="diagram" role="img" aria-label="Flex M bei Hostpoint mit integrierter Suche oder Flex S bei Hostpoint mit externer Suche bei Exoscale">
+        <div class="node"><strong>Hostpoint Flex</strong><span>Fixe Ressourcen<br>App · Datenbank</span></div>
+        <span class="connector" aria-hidden="true">+</span>
+        <div class="node search"><strong>OpenSearch</strong><span>integriert oder<br>Exoscale</span></div>
+      </div>
+      <div class="flex-options">
+        <div class="option"><strong>A · Flex M · ab CHF 170/Monat</strong>OpenSearch integriert bei Hostpoint. Ein Anbieter; Anwendung und Suche teilen Serverressourcen.</div>
+        <div class="option"><strong>B · Flex S + Exoscale · ca. CHF 197/Monat</strong>Suche bleibt separat und kann unabhängig wachsen. Zwei Anbieter; Netzwerkverbindung erforderlich.</div>
+      </div>
+      <div class="suitable"><strong>Passt, wenn:</strong> Business nicht ausreicht oder fest zugeteilte Leistung wichtiger ist als der günstigste Preis.</div>
+    </article>
+  </section>
+
+  <section class="chart-section" aria-labelledby="cost-heading">
+    <h2 id="cost-heading">Monatliche Gesamtkosten im Vergleich</h2>
+    <p>Richtwerte aus der vorhandenen Planung; Angebot 3 zeigt beide Varianten.</p>
+    <svg class="chart" viewBox="0 0 760 280" role="img" aria-labelledby="chart-title chart-desc">
+      <title id="chart-title">Geschätzte Hosting-Kosten pro Monat</title>
+      <desc id="chart-desc">Standard kostet etwa 73 Franken, Business etwa 87 Franken, Managed Flex M ab 170 Franken und Flex S mit Exoscale etwa 197 Franken pro Monat.</desc>
+      <line class="gridline" x1="86" y1="202" x2="730" y2="202" />
+      <line class="gridline" x1="86" y1="162" x2="730" y2="162" />
+      <line class="gridline" x1="86" y1="122" x2="730" y2="122" />
+      <line class="gridline" x1="86" y1="82" x2="730" y2="82" />
+      <line class="gridline" x1="86" y1="42" x2="730" y2="42" />
+      <line class="axis" x1="86" y1="202" x2="730" y2="202" />
+      <text x="74" y="206" text-anchor="end">0</text>
+      <text x="74" y="166" text-anchor="end">50</text>
+      <text x="74" y="126" text-anchor="end">100</text>
+      <text x="74" y="86" text-anchor="end">150</text>
+      <text x="74" y="46" text-anchor="end">200 CHF</text>
+      <rect x="139" y="143.6" width="82" height="58.4" rx="6" fill="#3aa08b" />
+      <rect x="292" y="132.4" width="82" height="69.6" rx="6" fill="#e0a63c" />
+      <rect x="445" y="66" width="82" height="136" rx="6" fill="#0060a9" />
+      <rect x="598" y="44.4" width="82" height="157.6" rx="6" fill="#6c8fb0" />
+      <text class="value" x="180" y="135" text-anchor="middle">CHF 73</text>
+      <text class="value" x="333" y="124" text-anchor="middle">CHF 87</text>
+      <text class="value" x="486" y="58" text-anchor="middle">ab 170</text>
+      <text class="value" x="639" y="37" text-anchor="middle">ca. 197</text>
+      <text x="180" y="229" text-anchor="middle">Standard</text>
+      <text x="333" y="229" text-anchor="middle">Business</text>
+      <text x="486" y="229" text-anchor="middle">Flex M · A</text>
+      <text x="639" y="229" text-anchor="middle">Flex S · B</text>
+      <text x="486" y="250" text-anchor="middle">integrierte Suche</text>
+      <text x="639" y="250" text-anchor="middle">+ Exoscale</text>
+    </svg>
+  </section>
+
+  <aside class="notes">
+    <p><strong>Wichtig:</strong> Preise, Tarifdetails und Leistungsangaben sind Schätz- bzw. Planungswerte und keine verbindlichen Anbieterangebote. Bitte vor einer Entscheidung direkt bei Hostpoint und Exoscale prüfen.</p>
+    <p>Für die detaillierte Architektur, Wechselkriterien und Annahmen zum Lastindex siehe den <a href="hosting.html">Skalierungspfad</a> und den <a href="index.html">Skalierungsrechner</a>.</p>
+  </aside>
+  <p class="foot">Kostenschätzung gemäß Projektplanung, Stand November 2026.</p>
+</main>
+</body>
+</html>
